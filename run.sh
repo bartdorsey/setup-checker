@@ -5,7 +5,7 @@ if [ -d /tmp/setup-checker ]; then
 fi
 
 mkdir /tmp/setup-checker
-git clone -q https://raw.githubusercontent.com/bartdorsey/setup-checker/main/run.sh /tmp/setup-checker
+git clone -q https://github.com/bartdorsey/setup-checker /tmp/setup-checker
 
 cd /tmp/setup-checker
 ./check.sh
