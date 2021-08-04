@@ -1,12 +1,12 @@
 #!/bin/bash -l
 
-if [ -d $HOME/.aa-setup-checker ]; then
-   rm -rf $HOME/.aa-setup-checker
+if [ -d $HOME/setup-checker ]; then
+   rm -rf $HOME/setup-checker
 fi
 
-mkdir $HOME/.aa-setup-checker
-git clone -q https://github.com/appacademy/aa-setup-checker.git ~/.aa-setup-checker
+mkdir $HOME/.setup-checker
+git clone -q https://github.com/appacademy/aa-setup-checker.git ~/.setup-checker
 
-cd ~/.aa-setup-checker
+cd ~/setup-checker
 ./check.sh
 cd -
