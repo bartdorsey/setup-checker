@@ -7,6 +7,6 @@ fi
 mkdir /tmp/setup-checker
 git clone -q https://github.com/bartdorsey/setup-checker /tmp/setup-checker
 
-cd /tmp/setup-checker
+cd /tmp/setup-checker || exit
 ./check.sh
-cd -
+cd - || exit

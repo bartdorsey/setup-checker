@@ -1,3 +1,4 @@
+#!/bin/bash
 NO_FORMAT="\033[0m"
 C_GREEN="\033[1;92m"
 C_CYAN="\033[0;36m"
@@ -7,7 +8,7 @@ C_WHITE="\033[1:97m"
 C_YELLOW="\033[1;33m"
 
 hr() {
-  s=$(printf "%-80s" "")
+  s=$(printf "%-${COLUMNS}s" "")
   f_bold "${s// /―}"
   return
 }
@@ -18,26 +19,26 @@ title() {
 }
 
 c_cyan() {
-  printf "${C_CYAN}${@}${NO_FORMAT}\n"
+  printf "%b%s%b\n" "${C_CYAN}" "${@}" "${NO_FORMAT}"
   return
 }
 
 c_red() {
-  printf "${C_RED}${@}${NO_FORMAT}\n"
+  printf "%b%s%b\n" "${C_RED}" "${@}" "${NO_FORMAT}"
   return
 }
 
 c_yellow() {
-  printf "${C_YELLOW}${@}${NO_FORMAT}\n"
+  printf "%b%s%b\n" "${C_YELLOW}" "${@}" "${NO_FORMAT}"
   return
 }
 
 c_green() {
-  printf "${C_GREEN}${@}${NO_FORMAT}\n"
+  printf "%b%s%b\n" "${C_GREEN}" "${@}" "${NO_FORMAT}"
   return
 }
 
 f_bold() {
-  printf "${F_BOLD}${C_WHITE}${@}${NO_FORMAT}\n"
+  printf "%b%b%s%b\n" "${F_BOLD}" "${C_WHITE}" "${@}" "${NO_FORMAT}"
   return
 }

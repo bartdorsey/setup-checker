@@ -1,5 +1,7 @@
+#!/bin/bash
 source ./helpers/utils.sh
-source $(shell_startup_file) > /dev/null 2>&1
+# shellcheck disable=SC1090
+source "$(shell_startup_file)" > /dev/null 2>&1
 source ./helpers/colors.sh
 DOCKER=$(which docker)
 DOCKER_VERSION=$(docker --version 2> /dev/null)
@@ -17,12 +19,12 @@ if [ -z "$DOCKER" ]; then
 fi
 
 DOCKER_HELLO_WORLD=$(docker run --rm hello-world 2> /dev/null)
-DOES_DOCKER_WORK=$(echo $DOCKER_HELLO_WORLD | grep -c "Hello from Docker");
+DOES_DOCKER_WORK=$(echo "$DOCKER_HELLO_WORLD" | grep -c "Hello from Docker");
 
-if [ $DOES_DOCKER_WORK != 1 ]; then
+if [ "$DOES_DOCKER_WORK" != 1 ]; then
     c_red "Docker hello world didn't function properly"
     c_red "Make sure docker is installed and running properly"
-    c_red $DOCKER_HELLO_WORLD
+    c_red "$DOCKER_HELLO_WORLD"
     exit 1;
 fi
 

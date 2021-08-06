@@ -1,27 +1,33 @@
+#!/bin/bash
 source ./helpers/utils.sh
-source $(shell_startup_file) > /dev/null 2>&1
+# shellcheck disable=SC1090
+source "$(shell_startup_file)" > /dev/null 2>&1
 source ./helpers/colors.sh
 
 LTS_NODE_VERSION=14
 
 NODE=$(which node)
-NODE_IS_FROM_NVM=$(echo $NODE | grep -c "nvm")
+NODE_IS_FROM_NVM=$(echo "$NODE" | grep -c "nvm")
 NODE_VERSION=$($NODE --version)
-NODE_IS_LTS=$(echo $NODE_VERSION | grep -c $LTS_NODE_VERSION)
+NODE_IS_LTS=$(echo "$NODE_VERSION" | grep -c $LTS_NODE_VERSION)
 NPM=$(which npm)
 NPM_VERSION=$($NPM --version)
 NVM_COMMAND="curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
 NVM_LINES="export NVM_DIR="$HOME/.nvm"\n[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm"
 NODE_ARCH=$($NODE ./helpers/node-arch-check.js)
+ESLINT=$(which eslint)
+ESLINT_VERSION=$(eslint --version)
 
 hr
 echo "Checking Node.JS"
 hr
-echo "Node Binary: ${NODE}"
+echo "Node Path: ${NODE}"
 echo "Node Architecture: ${NODE_ARCH}"
 echo "Node Version: ${NODE_VERSION}"
-echo "NPM Binary: ${NPM}"
+echo "NPM Path: ${NPM}"
 echo "NPM Version: ${NPM_VERSION}"
+echo "ESLint Version: ${ESLINT_VERSION}"
+echo "ESLint Path: ${ESLINT}"
 
 if [ ! -d ~/.nvm ]; then
     c_red "NVM isn't installed into your home directory"
@@ -35,7 +41,7 @@ if [ -z "$NVM_DIR" ]; then
     c_red "NVM isn't initialized properly"
     c_red "Please check your startup files for the correct NVM startup lines"
     echo
-    f_bold $NVM_LINES
+    f_bold "$NVM_LINES"
     exit 1;
 fi
 
@@ -51,7 +57,7 @@ if [ -z "$NODE" ]; then
     exit 1;
 fi
 
-if [ $NODE_IS_FROM_NVM != 1 ]; then
+if [ "$NODE_IS_FROM_NVM" != 1 ]; then
     c_red "Your node version isn't coming from NVM"
     c_red "Check to make sure you don't have node installed globally"
     c_red "somewhere in your PATH"
@@ -59,11 +65,19 @@ if [ $NODE_IS_FROM_NVM != 1 ]; then
     exit 1;
 fi
 
-if [ $NODE_IS_LTS != 1 ]; then
+if [ "$NODE_IS_LTS" != 1 ]; then
     c_red "You aren't running Node.JS ${LTS_NODE_VERSION}"
     c_red "Please use nvm to update to version ${LTS_NODE_VERSION}"
     c_red "Run 'nvm install ${LTS_NODE_VERSION}"
     c_red "Followed by 'nvm alias default ${LTS_NODE_VERSION}'"
+    exit 1;
+fi
+
+if [ -z "$ESLINT" ] || [ "$ESLINT" = "eslint not found" ]; then
+    c_red "Couldn't find eslint in your PATH. Check to make sure it is"
+    c_red "installed globally."
+    echo
+    c_red "Run 'npm install -g eslint' to install."
     exit 1;
 fi
 

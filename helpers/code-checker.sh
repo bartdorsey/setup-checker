@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./helpers/colors.sh
 
 CODE=$(which code)

@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./helpers/colors.sh
 source ./helpers/utils.sh
 hr
@@ -6,28 +7,28 @@ hr
 c_green "Shell: $SHELL"
 c_green "Shell Startup File: $(shell_startup_file)"
 
-if [ $SHELL = "/bin/bash" ]; then
+if [ "$SHELL" = "/bin/bash" ]; then
     if [ -f ~/.bash_profile ]; then
-        c_green "~/.bash_profile exists: true"
+        c_green "${HOME}/.bash_profile exists: true"
     else
-        c_green "~/.bash_profile exists: false"
+        c_green "${HOME}/.bash_profile exists: false"
     fi
     if [ -f ~/.profile ]; then
-        c_green "~/.profile exists: true"
+        c_green "${HOME}/.profile exists: true"
     else
-        c_green "~/.profile exists: false"
+        c_green "${HOME}/.profile exists: false"
     fi
 
     # Check for .bash_profile that might be hiding your .profile and .bashrc
-    if [ -f $HOME/.bash_profile ]; then
-        BASH_PROFILE_LINES=$(wc -l $HOME/.bash_profile | awk '{print $1}')
+    if [ -f "${HOME}/.bash_profile" ]; then
+        BASH_PROFILE_LINES=$(wc -l "${HOME}/.bash_profile" | awk '{print $1}')
         if [ "$BASH_PROFILE_LINES" -eq "0" ]; then
             c_red "You have an empty .bash_profile!"
             c_red "This will cause your .profile and .bashrc to not be executed"
             c_red "You probably want to remove this"
             exit 1
         fi
-        if [ -f $HOME/.profile ]; then
+        if [ -f "${HOME}/.profile" ]; then
             c_red "You have both a ~/.bash_profile and a ~/.profile file"
             c_red "This probably isn't what you intended."
             c_red "if ~/.bash_profile exists, bash will not run the ~/.profile file."
@@ -55,18 +56,18 @@ if [ $SHELL = "/bin/bash" ]; then
         c_red "fi"
     }
 
-    if [ -f $HOME/.bashrc ]; then
-        if [ -f $HOME/.bash_profile ]; then 
-            BASHRC_IN_BASH_PROFILE=$(cat $HOME/.bash_profile | grep -c ".bashrc");
-            if (( $BASHRC_IN_BASH_PROFILE == 0 )); then
+    if [ -f "${HOME}/.bashrc" ]; then
+        if [ -f "${HOME}/.bash_profile" ]; then 
+            BASHRC_IN_BASH_PROFILE=$(grep -c ".bashrc" < "${HOME}/.bash_profile");
+            if (( "$BASHRC_IN_BASH_PROFILE" == 0 )); then
                 bashrc_error;
                 exit 1;
             fi
         fi
 
-        if [ -f $HOME/.profile ]; then
-            BASHRC_IN_PROFILE=$(cat $HOME/.profile | grep -c ".bashrc");
-            if (( $BASHRC_IN_PROFILE == 0 )); then
+        if [ -f "${HOME}/.profile" ]; then
+            BASHRC_IN_PROFILE=$(grep -c ".bashrc" < "${HOME}/.profile");
+            if (( "$BASHRC_IN_PROFILE" == 0 )); then
                 bashrc_error;
                 exit 1;
             fi

@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./helpers/colors.sh
 
 FEDORA_VERSION=$(cat /etc/fedora-release)
