@@ -1,7 +1,5 @@
 #!/bin/bash
 source ./helpers/utils.sh
-# shellcheck disable=SC1090
-source "$(shell_startup_file)" > /dev/null 2>&1
 source ./helpers/colors.sh
 
 LTS_NODE_VERSION=14

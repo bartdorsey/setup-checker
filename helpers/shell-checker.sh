@@ -74,3 +74,5 @@ if [ "$SHELL" = "/bin/bash" ]; then
         fi
     fi
 fi
+
+c_green "Shell OK"
