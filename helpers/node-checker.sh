@@ -11,10 +11,15 @@ NODE_IS_LTS=$(echo "$NODE_VERSION" | grep -c $LTS_NODE_VERSION)
 NPM=$(which npm)
 NPM_VERSION=$($NPM --version)
 NVM_COMMAND="curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
+NVM_IN_SHELL_STARTUP_FILE=$(grep -ic 'nvm.sh' < "$(shell_startup_file)")
 NVM_LINES="export NVM_DIR="$HOME/.nvm"\n[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm"
 NODE_ARCH=$($NODE ./helpers/node-arch-check.js)
 ESLINT=$(which eslint)
 ESLINT_VERSION=$(eslint --version 2> /dev/null)
+
+# Start up nvm so we can check it.
+# shellcheck disable=SC1091
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 hr
 c_cyan "Checking Node.JS"
@@ -26,6 +31,15 @@ echo "NPM Path: ${NPM}"
 echo "NPM Version: ${NPM_VERSION}"
 echo "ESLint Version: ${ESLINT_VERSION}"
 echo "ESLint Path: ${ESLINT}"
+
+if [ "${NVM_IN_SHELL_STARTUP_FILE}" = 0 ]; then
+    c_yellow "nvm does not appear to be initialized in your"
+    c_yellow "shell startup file: $(shell_startup_file)"
+    c_yellow "You should check to make sure these lines exist in that file:"
+    echo
+    echo "$NVM_LINES"
+    echo
+fi
 
 if [ ! -d ~/.nvm ]; then
     c_red "NVM isn't installed into your home directory"
