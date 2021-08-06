@@ -14,10 +14,10 @@ NVM_COMMAND="curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/insta
 NVM_LINES="export NVM_DIR="$HOME/.nvm"\n[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm"
 NODE_ARCH=$($NODE ./helpers/node-arch-check.js)
 ESLINT=$(which eslint)
-ESLINT_VERSION=$(eslint --version)
+ESLINT_VERSION=$(eslint --version 2> /dev/null)
 
 hr
-echo "Checking Node.JS"
+c_cyan "Checking Node.JS"
 hr
 echo "Node Path: ${NODE}"
 echo "Node Architecture: ${NODE_ARCH}"
