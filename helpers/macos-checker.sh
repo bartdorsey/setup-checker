@@ -27,3 +27,8 @@ $SHELL ./helpers/code-checker.sh
 if [ $? -eq 1 ]; then
     exit 1
 fi
+$SHELL ./helpers/postgres-checker.sh
+if [ $? -eq 1 ]; then
+    exit 1
+fi
+echo
