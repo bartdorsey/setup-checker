@@ -10,8 +10,6 @@ $SHELL ./helpers/shell-checker.sh
 if [ $? -eq 1 ]; then
   exit 1;
 fi
-
-# Check for Docker
 echo
 $SHELL ./helpers/node-checker.sh
 if [ $? -eq 1 ]; then

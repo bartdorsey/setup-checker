@@ -23,3 +23,28 @@ If for some reason it's not executable, you may need to run this:
 ```shell
 chmod u+x check.sh
 ```
+
+## What it checks
+
+It supports the following operating systems:
+
+- Windows with WSL 2
+- Ubuntu Linux
+- Debian Linux
+- Fedora Linux
+- Raspbian Linux (Raspberry Pi)
+- macOS (Intel and M1 architecture)
+
+It checks the following tools:
+
+- Shell
+  - Checks which shell you are running and tells you the startup file for that shell
+- NodeJS
+  - Supports NodeJS installed via NVM.
+  - Checks that ESLint is installed globally
+- VSCode
+  - Checks that the code command line is installed correctly
+- PostgreSQL 
+  - Checks that the psql tools are installed
+  - Checks that postgres is up and running
+  - Checks that we can query the server without a username and password (through environment variables or a .pgpass file)
