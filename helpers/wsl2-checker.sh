@@ -1,7 +1,7 @@
 #!/bin/bash
 source ./helpers/colors.sh
 WSL=$(which wsl.exe)
-WSL_VERSION=$(wsl.exe -l -v | tr -d '\0' | grep Ubuntu | awk '{print $4}' | tr -d '\n\r')
+WSL_VERSION=$(wsl.exe -l -v | tr -d '\0' | grep Ubuntu | grep -c -E '\s2\s')
 
 hr
 title "Checking WSL"
