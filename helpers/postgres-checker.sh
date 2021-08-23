@@ -14,6 +14,7 @@ PSQL="$(which psql)"
 PSQL_VERSION=$(psql --version)
 QUERY="$(echo "SELECT 1+1;" | psql 2>&1)"
 CANT_RUN_QUERIES="$(echo "${QUERY}" | grep -c FATAL)"
+PSQL_CANT_CONNECT="$(echo "${QUERY}" | grep -c 'could not connect to server')"
 NO_DATABASE="$(echo ${QUERY} | grep -c "database.*does not exist")"
 
 
@@ -56,6 +57,14 @@ if [ "$NO_DATABASE" -ge 1 ]; then
 fi
 
 if [ "$CANT_RUN_QUERIES" -ge 1 ]; then
+     c_red "Can't run queries against the PostgreSQL database without supplying"
+     c_red "a username and password. Try configuring the environment vairables PGUSER, PGHOST or a .pgpass file"
+     echo
+     c_red "$QUERY"
+     exit 1;
+fi
+
+if [ "$PSQL_CANT_CONNECT" -ge 1 ]; then
      c_red "Can't run queries against the PostgreSQL database without supplying"
      c_red "a username and password. Try configuring the environment vairables PGUSER, PGHOST or a .pgpass file"
      echo
