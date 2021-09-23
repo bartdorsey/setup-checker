@@ -10,7 +10,7 @@ hr
 echo "Code Binary: ${CODE}"
 echo "Version: ${CODE_VERSION}"
 
-if [ -z "$CODE" ]; then
+if [ -z "$CODE" ] || [ "$CODE" -eq "code not found" ]; then
     c_red "You don't have Visual Studio Code installed properly"
     c_red "Please reinstall it"
     exit 1;
