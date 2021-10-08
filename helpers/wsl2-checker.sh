@@ -16,11 +16,11 @@ echo $WINDOWS_VERSION
 echo "Windows Build: $WINDOWS_BUILD"
 echo "WSL Version: $WSL_VERSION"
 
-if [ $WINDOWS_BUILD -lt $MINIMUM_WINDOWS_BUILD_VERSION ]; then
-    c_red "Your Windows 10 build version isn't high enough"
-    c_red "Please run Windows update and update to at least build $MINIMUM_WINDOWS_BUILD_VERSION"
-    exit 1;
-fi
+# if [ $WINDOWS_BUILD -lt $MINIMUM_WINDOWS_BUILD_VERSION ]; then
+#     c_red "Your Windows 10 build version isn't high enough"
+#     c_red "Please run Windows update and update to at least build $MINIMUM_WINDOWS_BUILD_VERSION"
+#     exit 1;
+# fi
 
 if [ -z "$WSL" ]; then
     c_red "WSL doesn't appear to be installed."
