@@ -2,7 +2,7 @@
 source ./helpers/utils.sh
 source ./helpers/colors.sh
 
-LTS_NODE_VERSION=14
+LTS_NODE_VERSION=16
 
 NODE=$(which node)
 NODE_IS_FROM_NVM=$(echo "$NODE" | grep -c "nvm")
