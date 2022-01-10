@@ -10,7 +10,7 @@ shell_startup_file() {
             else
                 echo "$HOME/.bash_profile"
             fi
-            exit 0
+            # exit 0
         elif [ -e "$HOME/.profile" ]; then
             BASHRC_IN_PROFILE=$(grep -c '\$HOME/.bashrc' < "$HOME/.profile")
             if [ -e "$HOME/.bashrc" ] && [ "$BASHRC_IN_PROFILE" != 1 ];then
@@ -18,13 +18,13 @@ shell_startup_file() {
             else
                 echo "$HOME/.profile"
             fi
-            exit 0;
+            # exit 0;
         fi
     elif [ "$SHELL" = '/bin/zsh' ]; then
             echo "$HOME/.zshrc"
     else
         echo "I couldn't figure out what shell you are using, please use a supported shell"
-        exit 1;
+        # exit 1;
     fi
 }
 
