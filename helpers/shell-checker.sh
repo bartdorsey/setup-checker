@@ -26,14 +26,14 @@ if [ "$SHELL" = "/bin/bash" ]; then
             c_red "You have an empty .bash_profile!"
             c_red "This will cause your .profile and .bashrc to not be executed"
             c_red "You probably want to remove this"
-            exit 1
+            # exit 1
         fi
         if [ -f "${HOME}/.profile" ]; then
             c_red "You have both a ~/.bash_profile and a ~/.profile file"
             c_red "This probably isn't what you intended."
             c_red "if ~/.bash_profile exists, bash will not run the ~/.profile file."
             c_red "You should consolidate the lines into a single file."
-            exit 1
+            # exit 1
         fi
     fi
 
@@ -61,7 +61,7 @@ if [ "$SHELL" = "/bin/bash" ]; then
             BASHRC_IN_BASH_PROFILE=$(grep -c ".bashrc" < "${HOME}/.bash_profile");
             if (( "$BASHRC_IN_BASH_PROFILE" == 0 )); then
                 bashrc_error;
-                exit 1;
+                # exit 1;
             fi
         fi
 
@@ -69,7 +69,7 @@ if [ "$SHELL" = "/bin/bash" ]; then
             BASHRC_IN_PROFILE=$(grep -c ".bashrc" < "${HOME}/.profile");
             if (( "$BASHRC_IN_PROFILE" == 0 )); then
                 bashrc_error;
-                exit 1;
+                # exit 1;
             fi
         fi
     fi

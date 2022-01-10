@@ -46,7 +46,7 @@ if [ ! -d ~/.nvm ]; then
     c_red "Please run this command to install it"
     echo
     f_bold "$NVM_COMMAND"
-    exit 1;
+    # exit 1;
 fi
 
 if [ -z "$NVM_DIR" ]; then
@@ -54,7 +54,7 @@ if [ -z "$NVM_DIR" ]; then
     c_red "Please check your startup files for the correct NVM startup lines"
     echo
     f_bold "$NVM_LINES"
-    exit 1;
+    # exit 1;
 fi
 
 # Check node and version
@@ -66,7 +66,7 @@ if [ -z "$NODE" ]; then
     f_bold "Or you might need to install node with this command:"
     echo 
     f_bold "nvm install $LTS_NODE_VERSION"
-    exit 1;
+    # exit 1;
 fi
 
 if [ "$NODE_IS_FROM_NVM" != 1 ]; then
@@ -74,7 +74,7 @@ if [ "$NODE_IS_FROM_NVM" != 1 ]; then
     c_red "Check to make sure you don't have node installed globally"
     c_red "somewhere in your PATH"
     c_red "Node binary = ${NODE}"
-    exit 1;
+    # exit 1;
 fi
 
 if [ "$NODE_IS_LTS" != 1 ]; then
@@ -82,7 +82,7 @@ if [ "$NODE_IS_LTS" != 1 ]; then
     c_red "Please use nvm to update to version ${LTS_NODE_VERSION}"
     c_red "Run 'nvm install ${LTS_NODE_VERSION}"
     c_red "Followed by 'nvm alias default ${LTS_NODE_VERSION}'"
-    exit 1;
+    # exit 1;
 fi
 
 if [ -z "$ESLINT" ] || [ "$ESLINT" = "eslint not found" ]; then
@@ -90,7 +90,7 @@ if [ -z "$ESLINT" ] || [ "$ESLINT" = "eslint not found" ]; then
     c_red "installed globally."
     echo
     c_red "Run 'npm install -g eslint' to install."
-    exit 1;
+    # exit 1;
 fi
 
 c_green "Node.JS is OK"

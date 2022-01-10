@@ -21,7 +21,7 @@ NO_DATABASE="$(echo ${QUERY} | grep -c "database.*does not exist")"
 if [ -z "$PSQL" ]; then
      c_red "You don't appear to have the psql command line installed"
      c_red "Please install postgres"
-     exit 1;
+     # exit 1;
 fi
 
 echo "PostgreSQL Version: ${PSQL_VERSION}"
@@ -44,7 +44,7 @@ fi
 if [ "$POSTGRES_RESPONDING" = 0 ]; then
      c_red "Your PostgreSQL server does not appear to be available on localhost at port 5432"
      c_red "Please start it or check that it's listening on port 5432"
-     exit 1;
+     # exit 1;
 fi
 
 if [ "$NO_DATABASE" -ge 1 ]; then
@@ -53,7 +53,7 @@ if [ "$NO_DATABASE" -ge 1 ]; then
      c_red "Set PGDATBASE or create the database using 'createdb'"
      echo
      c_red "$QUERY"
-     exit 1;
+     # exit 1;
 fi
 
 if [ "$CANT_RUN_QUERIES" -ge 1 ]; then
@@ -61,7 +61,7 @@ if [ "$CANT_RUN_QUERIES" -ge 1 ]; then
      c_red "a username and password. Try configuring the environment vairables PGUSER, PGHOST or a .pgpass file"
      echo
      c_red "$QUERY"
-     exit 1;
+     # exit 1;
 fi
 
 if [ "$PSQL_CANT_CONNECT" -ge 1 ]; then
@@ -69,7 +69,7 @@ if [ "$PSQL_CANT_CONNECT" -ge 1 ]; then
      c_red "a username and password. Try configuring the environment vairables PGUSER, PGHOST or a .pgpass file"
      echo
      c_red "$QUERY"
-     exit 1;
+     # exit 1;
 fi
 
 DATABASES="$(echo "\l" | psql 2>&1)"

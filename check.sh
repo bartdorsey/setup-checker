@@ -19,45 +19,45 @@ success() {
 
 if [ "$IS_MACOS" = 1 ]; then
     $SHELL -l ./helpers/macos-checker.sh
-    if [ $? -eq 1 ]; then
-        exit 1
-    fi
-    success
+    # if [ $? -eq 1 ]; then
+    #     exit 1
+    # fi
+    # success
     exit 0
 elif [ "$IS_WINDOWS" = 1 ]; then
     $SHELL -l ./helpers/windows-checker.sh
-    if [ $? -eq 1 ]; then
-        exit 1
-    fi
-    success
+    # if [ $? -eq 1 ]; then
+    #     exit 1
+    # fi
+    # success
     exit 0
 elif [ "$IS_UBUNTU" = 1 ]; then
     $SHELL ./helpers/ubuntu-checker.sh
-    if [ $? -eq 1 ]; then
-        exit 1
-    fi
-    success
+    # if [ $? -eq 1 ]; then
+    #     exit 1
+    # fi
+    # success
     exit 0
 elif [ "$IS_DEBIAN" = 1 ]; then
     $SHELL ./helpers/debian-checker.sh
-    if [ $? -eq 1 ]; then
-        exit 1
-    fi
-    success
+    # if [ $? -eq 1 ]; then
+    #     exit 1
+    # fi
+    # success
     exit 0
 elif [ "$IS_RASPBIAN" = 1 ]; then
     $SHELL ./helpers/raspbian-checker.sh
-    if [ $? -eq 1 ]; then
-        exit 1
-    fi
-    success
+    # if [ $? -eq 1 ]; then
+    #     exit 1
+    # fi
+    # success
     exit 0
 elif [ -e /etc/fedora-release ]; then
     $SHELL ./helpers/fedora-checker.sh
-    if [ $? -eq 1 ]; then
-        exit 1
-    fi
-    success
+    # if [ $? -eq 1 ]; then
+    #     exit 1
+    # fi
+    # success
     exit 0
 else
     c_red "Unknown Operating System, checker script not supported"

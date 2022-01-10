@@ -16,19 +16,19 @@ c_yellow "you should switch back to the native terminal if possible"
 fi
 
 $SHELL ./helpers/shell-checker.sh
-if [ $? -eq 1 ];then
-   exit 1
-fi
+# if [ $? -eq 1 ];then
+#    exit 1
+# fi
 $SHELL ./helpers/node-checker.sh
-if [ $? -eq 1 ]; then
-    exit 1
-fi
+# if [ $? -eq 1 ]; then
+    # exit 1
+# fi
 $SHELL ./helpers/code-checker.sh
-if [ $? -eq 1 ]; then
-    exit 1
-fi
+# if [ $? -eq 1 ]; then
+    # exit 1
+# fi
 $SHELL ./helpers/postgres-checker.sh
-if [ $? -eq 1 ]; then
-    exit 1
-fi
+# if [ $? -eq 1 ]; then
+    # exit 1
+# fi
 echo

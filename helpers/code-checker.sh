@@ -13,7 +13,7 @@ echo "Version: ${CODE_VERSION}"
 if [ -z "$CODE" ] || [ "$CODE" = "code not found" ]; then
     c_red "You don't have Visual Studio Code installed properly"
     c_red "Please reinstall it"
-    exit 1;
+    # exit 1;
 fi
 
 c_green "VSCode is OK"
