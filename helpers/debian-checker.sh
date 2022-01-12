@@ -9,7 +9,8 @@ title "Checking Debian"
 hr
 echo "Debian Version: $DEBIAN_VERSION"
 
-print_json_line os_version $DEBIAN_VERSION >> report.json
+print_json_line linux_version $DEBIAN_VERSION >> report.json
+print_json_line linux_os "Debian" >> report.json
 
 # Check Linux
 echo

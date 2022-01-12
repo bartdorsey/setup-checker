@@ -28,7 +28,6 @@ if [ "$IS_MACOS" = 1 ]; then
     print_json_line os macOS >> report.json
     $SHELL -l ./helpers/macos-checker.sh
 elif [ "$IS_WINDOWS" = 1 ]; then
-    print_json_line os Windows >> report.json
     $SHELL -l ./helpers/windows-checker.sh   
 elif [ "$IS_UBUNTU" = 1 ]; then
     print_json_line os Ubuntu >> report.json

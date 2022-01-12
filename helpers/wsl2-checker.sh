@@ -3,9 +3,9 @@ source ./helpers/colors.sh
 source ./helpers/utils.sh
 
 WSL=$(which wsl.exe)
-WINDOWS_NAME=$(systeminfo.exe | findstr.exe /B /C:"OS Name")
-WINDOWS_VERSION=$(systeminfo.exe | findstr.exe /B /C:"OS Version")
-WINDOWS_BUILD=$(echo $WINDOWS_VERSION | tr -d '\0\r' | awk '{print $6}')
+WINDOWS_NAME=$(systeminfo.exe | findstr.exe /B /C:"OS Name" | tr -s ' ' | awk '{print $3, $4, $5}')
+WINDOWS_VERSION=$(systeminfo.exe | findstr.exe /B /C:"OS Version" | tr -s ' ' | awk '{print $3}')
+WINDOWS_BUILD=$(echo $WINDOWS_VERSION | tr -d '\0\r' | awk '{print $6}' | tr -s ' ')
 WSL_VERSION=$(wsl.exe --status | tr -d '\0\r'|grep "Default Version"| awk '{print $3}')
 
 MINIMUM_WINDOWS_BUILD_VERSION=19043
@@ -13,12 +13,13 @@ MINIMUM_WINDOWS_BUILD_VERSION=19043
 hr
 title "Checking WSL"
 hr
-echo $WINDOWS_NAME
-echo $WINDOWS_VERSION
+echo "Operating System: $WINDOWS_NAME"
+echo "Windows Version: $WINDOWS_VERSION"
 echo "Windows Build: $WINDOWS_BUILD"
 echo "WSL Version: $WSL_VERSION"
 
-print_json_line os_version $WINDOWS_NAME:$WINDOWS_VERSION:$WINDOWS_BUILD >> report.json
+print_json_line windows_os $WINDOWS_NAME >> report.json
+print_json_line windows_version $WINDOWS_VERSION >> report.json
 
 # if [ $WINDOWS_BUILD -lt $MINIMUM_WINDOWS_BUILD_VERSION ]; then
 #     c_red "Your Windows 10 build version isn't high enough"

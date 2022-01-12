@@ -9,6 +9,9 @@ title "Checking Raspbian"
 hr
 echo "Raspbian Version: $RASPBIAN_VERSION"
 
+print_json_line linux_version $RASPBIAN_VERSION >> report.json
+print_json_line linux_os "Raspbian" >> report.json
+
 # Check Linux
 echo
 $SHELL ./helpers/linux-checker.sh

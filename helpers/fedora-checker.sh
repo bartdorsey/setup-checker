@@ -9,7 +9,8 @@ title "Checking Fedora"
 hr
 echo "Debian Version: $FEDORA_VERSION"
 
-print_json_line os_version $FEDORA_VERSION >> report.json
+print_json_line linux_version $FEDORA_VERSION >> report.json
+print_json_line linux_os "Fedora" >> report.json
 
 # Check Linux
 echo
