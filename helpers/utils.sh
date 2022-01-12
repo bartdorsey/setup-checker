@@ -46,9 +46,13 @@ shell_startup_file_message() {
 }
 
 print_json_line() {
-    echo "  \"$1\":\"$2\","
+    KEY=$(echo "$1" | tr -d '\n')
+    VALUE=$(echo "$2" | tr -d '\n')
+    echo "  \"$KEY\":\"$VALUE\","
 }
 
 print_last_json_line() {
-   echo "  \"$1\":\"$2\""
+   KEY=$(echo "$1" | tr -d '\n')
+   VALUE=$(echo "$2" | tr -d '\n')
+   echo "  \"$KEY\":\"$VALUE\""
 }
