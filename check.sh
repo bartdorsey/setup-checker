@@ -2,6 +2,13 @@
 source ./helpers/colors.sh
 source ./helpers/utils.sh
 
+echo "{" > report.json
+
+echo "Enter your email address and press enter:"
+read EMAIL
+
+print_json_line email $EMAIL >> report.json
+
 IS_MACOS=$(uname -a | awk '{ print $1 }' | grep -c Darwin 2> /dev/null)
 IS_WINDOWS=$(which cmd.exe | grep -c -v 'not found' 2> /dev/null)
 LSB_RELEASE=$(which lsb_release | grep -c -v 'not found' 2> /dev/null)
@@ -18,47 +25,27 @@ success() {
 }
 
 if [ "$IS_MACOS" = 1 ]; then
+    print_json_line os macOS >> report.json
     $SHELL -l ./helpers/macos-checker.sh
-    # if [ $? -eq 1 ]; then
-    #     exit 1
-    # fi
-    # success
-    exit 0
 elif [ "$IS_WINDOWS" = 1 ]; then
-    $SHELL -l ./helpers/windows-checker.sh
-    # if [ $? -eq 1 ]; then
-    #     exit 1
-    # fi
-    # success
-    exit 0
+    print_json_line os Windows >> report.json
+    $SHELL -l ./helpers/windows-checker.sh   
 elif [ "$IS_UBUNTU" = 1 ]; then
+    print_json_line os Ubuntu >> report.json
     $SHELL ./helpers/ubuntu-checker.sh
-    # if [ $? -eq 1 ]; then
-    #     exit 1
-    # fi
-    # success
-    exit 0
 elif [ "$IS_DEBIAN" = 1 ]; then
+    print_json_line os Debian >> report.json
     $SHELL ./helpers/debian-checker.sh
-    # if [ $? -eq 1 ]; then
-    #     exit 1
-    # fi
-    # success
-    exit 0
 elif [ "$IS_RASPBIAN" = 1 ]; then
+    print_json_line os Raspbian >> report.json
     $SHELL ./helpers/raspbian-checker.sh
-    # if [ $? -eq 1 ]; then
-    #     exit 1
-    # fi
-    # success
-    exit 0
 elif [ -e /etc/fedora-release ]; then
+    print_json_line os Fedora >> report.json
     $SHELL ./helpers/fedora-checker.sh
-    # if [ $? -eq 1 ]; then
-    #     exit 1
-    # fi
-    # success
-    exit 0
 else
     c_red "Unknown Operating System, checker script not supported"
 fi
+
+echo "}" >> report.json
+
+curl -X POST -H "Content-Type: application/json" -d "@report.json" http://localhost:9000/report

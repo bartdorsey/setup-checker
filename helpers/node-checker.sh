@@ -32,6 +32,9 @@ echo "NPM Version: ${NPM_VERSION}"
 echo "ESLint Version: ${ESLINT_VERSION}"
 echo "ESLint Path: ${ESLINT}"
 
+print_json_line node_version $NODE_VERSION >> report.json
+print_json_line node_path $NODE >> report.json
+
 if [ "${NVM_IN_SHELL_STARTUP_FILE}" = 0 ]; then
     c_yellow "nvm does not appear to be initialized in your"
     c_yellow "shell startup file: $(shell_startup_file)"

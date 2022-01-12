@@ -1,5 +1,6 @@
 #!/bin/bash
 source ./helpers/colors.sh
+source ./helpers/utils.sh
 
 RASPBIAN_VERSION=$(lsb_release -r -s)
 

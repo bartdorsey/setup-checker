@@ -1,5 +1,7 @@
 #!/bin/bash
 source ./helpers/colors.sh
+source ./helpers/utils.sh
+
 WSL=$(which wsl.exe)
 WINDOWS_NAME=$(systeminfo.exe | findstr.exe /B /C:"OS Name")
 WINDOWS_VERSION=$(systeminfo.exe | findstr.exe /B /C:"OS Version")
@@ -15,6 +17,8 @@ echo $WINDOWS_NAME
 echo $WINDOWS_VERSION
 echo "Windows Build: $WINDOWS_BUILD"
 echo "WSL Version: $WSL_VERSION"
+
+print_json_line os_version $WINDOWS_NAME:$WINDOWS_VERSION:$WINDOWS_BUILD >> report.json
 
 # if [ $WINDOWS_BUILD -lt $MINIMUM_WINDOWS_BUILD_VERSION ]; then
 #     c_red "Your Windows 10 build version isn't high enough"

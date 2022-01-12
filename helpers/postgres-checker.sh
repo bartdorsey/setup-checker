@@ -21,7 +21,9 @@ NO_DATABASE="$(echo ${QUERY} | grep -c "database.*does not exist")"
 if [ -z "$PSQL" ]; then
      c_red "You don't appear to have the psql command line installed"
      c_red "Please install postgres"
-     # exit 1;
+     print_json_line postgres false >> report.json
+else
+     print_json_line postgres true >> report.json
 fi
 
 echo "PostgreSQL Version: ${PSQL_VERSION}"
@@ -34,6 +36,7 @@ echo "PGUSER: ${PGUSER}"
 echo "PGPORT: ${PGPOST}"
 echo "PGDATABASE: ${PGDATABASE}"
 
+print_last_json_line postgres_version $PSQL_VERSION | tr -d '\n' >> report.json
 
 if [ "$POSTGRES_RUNNING" = 0 ]; then
      c_yellow "Your postgreSQL server isn't showing up in the process list"

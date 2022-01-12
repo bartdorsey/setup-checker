@@ -44,3 +44,11 @@ shell_startup_file_message() {
         f_bold "code ${HOME}/.zshrc"
     fi
 }
+
+print_json_line() {
+    echo "  \"$1\":\"$2\","
+}
+
+print_last_json_line() {
+   echo "  \"$1\":\"$2\""
+}
