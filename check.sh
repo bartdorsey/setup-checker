@@ -48,4 +48,4 @@ fi
 
 echo "}" >> report.json
 
-curl -X POST -H "Content-Type: application/json" -d "@report.json" http://localhost:9000/report
+curl -X POST -H "Content-Type: application/json" -d "@report.json" https://setup-collector.herokuapp.com/report
